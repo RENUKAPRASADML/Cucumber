@@ -22,6 +22,7 @@ public class clickProceedButton {
     public void clickOnProceedButton(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
          proceedButton.click();
+        System.out.println("Hii");
         /*try{ JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].click();", proceedButton);
             System.out.println("cliked");
