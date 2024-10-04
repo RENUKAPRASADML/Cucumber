@@ -1,15 +1,35 @@
 pipeline {
     agent any
- stages {
-    stage('Build and Test') {
+    stages {
+        stage('Checkout') {
             steps {
-                // Run the shell script to execute Cucumber runner
-                sh '''
-                    #!/bin/bash
-                    mvn clean test -Dtest=src/test/java/runner/TestRunner
-                '''
+                git url: 'https://github.com/renukaprasad07111999/Cucumber.git'
             }
         }
- }
-}
 
+        stage('Build and Test') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        // Unix-based systems: Use nohup
+                        sh '''
+                        nohup mvn clean test -Dtest=src/test/java/runner/TestRunner.java &
+                        '''
+                    } else {
+                        // Windows-based systems: Run without nohup
+                        bat '''
+                        mvn clean test -Dtest=src/test/java/runner/TestRunner.java
+                        '''
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+           // junit '**/target/surefire-reports/*.xml'
+            echo "Build completed"
+        }
+    }
+}
