@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/renukaprasad07111999/Cucumber.git'
+                // Add credentials and specify the branch (optional if the repository is public)
+                git url: 'https://github.com/renukaprasad07111999/Cucumber.git', branch: 'main', credentialsId: 'renukaprasad07111999'
             }
         }
 
@@ -11,19 +12,18 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        // Unix-based systems: Use nohup
+                        // For Unix-based systems
                         sh '''
-                        nohup mvn clean test -Dtest=src/test/java/runner/TestRunner.java &
+                        nohup mvn clean test -Dtest=runner.TestRunner &
                         '''
                     } else {
-                        // Windows-based systems: Run without nohup
+                        // For Windows-based systems
                         bat '''
-                        mvn clean test -Dtest=src/test/java/runner/TestRunner.java
+                        mvn clean test -Dtest=runner.TestRunner
                         '''
                     }
                 }
             }
         }
     }
-
 }
