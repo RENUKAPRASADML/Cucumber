@@ -6,7 +6,7 @@ pipeline {
                 // Run the shell script to execute Cucumber runner
                 sh '''
                     #!/bin/bash
-                    mvn clean test -Dtest=RunnerClassName
+                    mvn clean test -Dtest=src/test/java/runner/TestRunner
                 '''
             }
         }
