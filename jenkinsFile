@@ -1,13 +1,14 @@
 pipeline {
     agent any
  
-    stages {
-        stage('Test') {
+    stage('Build and Test') {
             steps {
- 
-                // To run Maven on a Windows agent, use
-                bat "mvn -D clean test"
+                // Run the shell script to execute Cucumber runner
+                sh '''
+                    #!/bin/bash
+                    mvn clean test -Dtest=RunnerClassName
+                '''
             }
+        }
  }
-}
-}
+
