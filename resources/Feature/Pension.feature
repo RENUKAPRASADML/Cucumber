@@ -9,7 +9,8 @@ Feature: Retail Flow Pension
     Then click on Proceed button and user should navigate to Avail offer screen
 
     Examples:
-    |product name                      |mobile number    |Combination value|
+    |product name                     |mobile number    |Combination value|
+    | Canara Pension                  |     9868110599  |     10072780    |
 
 
   Scenario Outline: to check whether Pension loan exist

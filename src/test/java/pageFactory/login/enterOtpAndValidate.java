@@ -24,7 +24,7 @@ public class enterOtpAndValidate {
     WebElement clickValidateButton;
 
     public void toEnterOtpAndClickValidate(String mobileNo) {
-        enterOtp.sendKeys(generateOtp(mobileNo));
+        //enterOtp.sendKeys(generateOtp(mobileNo));
         enterOtp.sendKeys("998877");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         clickValidateButton.click();
