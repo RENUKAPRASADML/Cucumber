@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                // Add credentials and specify the branch (optional if the repository is public)
+                git url: 'https://github.com/renukaprasad07111999/Cucumber.git', branch: 'main', credentialsId: 'renukaprasad07111999'
+            }
+        }
+
+        stage('Build and Test') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        // For Unix-based systbbems
+                        sh '''
+                        nohup mvn clean test -Dtest=runner.TestRunner &
+                        '''
+                    } else {
+                        // For Windows-based systems
+                        bat '''
+                        mvn clean test -Dtest=runner.TestRunner
+                        '''
+                    }
+                }
+            }
+        }
+    }
+}
